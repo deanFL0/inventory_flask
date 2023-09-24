@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <h1>Item Edit</h1>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Item Edit</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row border-bottom border-black mb-3">
+                    <div class="col-12 mb-3">
+                        <a href="/item/list" class="btn btn-primary">Back</a>
+                    </div>
+                </div>
+                <form method="POST" action="/item/update">
+                    <input type="hidden" name="id" value="{{item.id}}">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Item Name</label>
+                        <input type="text" name="name" placeholder="Item Name" class="form-control" required value="{{item.name}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="quantity" class="form-label">Quantity</label>
+                        <input type="number" name="quantity" placeholder="Quantity" class="form-control" required value="{{item.quantity}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="number" name="price" placeholder="Price" class="form-control" required value="{{item.price}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <select name="category" class="form-control" required>
+                            <option value="" hidden>Select Category</option>
+                            {% for category in categories %}
+                            <option value="{{category.id}}" {% if category.id == item.categories.id %} selected {% endif %}>{{category.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <input type="text" name="description" placeholder="Description" class="form-control" value="{{item.description}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="rack" class="form-label">Rack</label>
+                        <select name="rack" class="form-control" required>
+                            <option value="" hidden>Select Rack</option>
+                            {% for rack in racks %}
+                            <option value="{{rack.id}}" {% if rack.id == item.rack.id %} selected {% endif %}>{{rack.name}} | {{rack.description}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+</div>
+<!-- /.card-body -->
+<div class="card-footer">
+</div>
+<!-- /.card-footer-->
+</div>
+</section>
+</div>
+{% endblock %}
